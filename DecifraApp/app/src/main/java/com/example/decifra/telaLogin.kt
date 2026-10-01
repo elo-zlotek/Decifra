@@ -1,7 +1,8 @@
-package com.example.decifra.telas
+package com.example.decifra
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -16,6 +17,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -26,13 +28,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TelaCriarConta(
-    onCriarClick: (String, String) -> Unit = { _, _ -> },
+fun TelaLogin(
+    onEntrarClick: () -> Unit = {},
+    onCriarContaClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     var usuario by remember { mutableStateOf("") }
@@ -47,7 +51,7 @@ fun TelaCriarConta(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Criar conta",
+            text = "Login",
             fontSize = 36.sp,
             fontWeight = FontWeight.Normal,
             color = Color.Black
@@ -95,28 +99,34 @@ fun TelaCriarConta(
         Spacer(modifier = Modifier.height(48.dp))
 
         Button(
-            onClick = { onCriarClick(usuario, senha) },
+            onClick = { onEntrarClick() },
             modifier = Modifier
                 .width(220.dp)
                 .height(55.dp)
                 .border(2.dp, Color.Black, RoundedCornerShape(28.dp)),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF1E88A8),
+                containerColor = Color(0xFFEF224A),
                 contentColor = Color.Black
             ),
             shape = RoundedCornerShape(28.dp)
         ) {
             Text(
-                text = "Criar",
+                text = "Entrar",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
+        }
+
+        Spacer(modifier = Modifier.height(48.dp))
+
+        TextButton(onClick = onCriarContaClick) {
+            Text("Não tem conta? Cadastre-se")
         }
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewTelaCriarConta() {
-    TelaCriarConta()
+fun PreviewTelaLogin() {
+    TelaLogin()
 }

@@ -1,4 +1,4 @@
-package com.example.decifra.telas
+package com.example.decifraappescolhaumtema
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -25,7 +25,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TelaEscolhaTema(modifier: Modifier = Modifier) {
+fun TelaEscolhaTema(
+    onTemaSelecionado: (String) -> Unit,
+    modifier: Modifier = Modifier
+
+) {
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -67,14 +71,14 @@ fun TelaEscolhaTema(modifier: Modifier = Modifier) {
                     text = "Animais",
                     containerColor = Color(0xFFEF224A),
                     textColor = Color.White,
-                    onClick = { },
+                    onClick = {onTemaSelecionado("Animais") },
                     modifier = Modifier.weight(1f)
                 )
                 BotaoTema(
                     text = "Comidas",
                     containerColor = Color(0xFF66b71b),
                     textColor = Color.Black,
-                    onClick = { },
+                    onClick = {onTemaSelecionado("Comidas")},
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -87,14 +91,14 @@ fun TelaEscolhaTema(modifier: Modifier = Modifier) {
                     text = "Profissões",
                     containerColor = Color(0xFF1589a7),
                     textColor = Color.White,
-                    onClick = { },
+                    onClick = {onTemaSelecionado("Profissões")},
                     modifier = Modifier.weight(1f)
                 )
                 BotaoTema(
                     text = "Objetos",
                     containerColor = Color(0xFFedc009),
                     textColor = Color.Black,
-                    onClick = { },
+                    onClick = { onTemaSelecionado("Objetos")},
                     modifier = Modifier.weight(1f)
                 )
             }
@@ -128,3 +132,4 @@ fun BotaoTema(
         )
     }
 }
+

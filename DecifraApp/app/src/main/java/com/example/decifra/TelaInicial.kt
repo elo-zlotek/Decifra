@@ -1,4 +1,4 @@
-package com.example.decifra.telas
+package com.example.decifra
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,7 +23,9 @@ import com.example.decifra.ui.theme.DecifraTheme
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun TelaInicial(modifier: Modifier = Modifier) {
+fun TelaInicial(
+    onJogarClick: () -> Unit = {},
+    modifier: Modifier = Modifier) {
     Column(
         modifier = modifier.fillMaxSize()
             .background(Color(0xFFF4E9E0)),
@@ -40,7 +42,7 @@ fun TelaInicial(modifier: Modifier = Modifier) {
 
         Button(
             onClick = {
-
+                onJogarClick()
             },
             modifier = Modifier
                 .width(250.dp)

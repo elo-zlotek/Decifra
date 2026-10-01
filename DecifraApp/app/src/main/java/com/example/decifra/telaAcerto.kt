@@ -1,4 +1,4 @@
-package com.example.decifra.telas
+package com.example.decifra
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background

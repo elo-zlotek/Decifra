@@ -1,8 +1,7 @@
-package com.example.decifra.telas
+package com.example.decifra
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -27,13 +26,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TelaLogin(
+fun TelaCriarConta(
+    onCriarClick: (String, String) -> Unit = { _, _ -> },
     modifier: Modifier = Modifier
 ) {
     var usuario by remember { mutableStateOf("") }
@@ -48,7 +47,7 @@ fun TelaLogin(
         verticalArrangement = Arrangement.Center
     ) {
         Text(
-            text = "Login",
+            text = "Criar conta",
             fontSize = 36.sp,
             fontWeight = FontWeight.Normal,
             color = Color.Black
@@ -96,38 +95,28 @@ fun TelaLogin(
         Spacer(modifier = Modifier.height(48.dp))
 
         Button(
-            onClick = { },
+            onClick = { onCriarClick(usuario, senha) },
             modifier = Modifier
                 .width(220.dp)
                 .height(55.dp)
                 .border(2.dp, Color.Black, RoundedCornerShape(28.dp)),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFFEF224A),
+                containerColor = Color(0xFF1E88A8),
                 contentColor = Color.Black
             ),
             shape = RoundedCornerShape(28.dp)
         ) {
             Text(
-                text = "Entrar",
+                text = "Criar",
                 fontSize = 20.sp,
                 fontWeight = FontWeight.Bold
             )
         }
-
-        Spacer(modifier = Modifier.height(48.dp))
-
-        Text(
-            text = "Não tem um login? Clique\naqui pra criar uma conta",
-            fontSize = 14.sp,
-            color = Color.Black,
-            textAlign = TextAlign.Center,
-            modifier = Modifier.clickable { }
-        )
     }
 }
 
 @Preview(showBackground = true)
 @Composable
-fun PreviewTelaLogin() {
-    TelaLogin()
+fun PreviewTelaCriarConta() {
+    TelaCriarConta()
 }

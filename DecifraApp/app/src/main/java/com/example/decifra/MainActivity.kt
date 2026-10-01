@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import com.example.decifra.telas.TelaInicial
 import com.example.decifra.ui.theme.DecifraTheme
 
 class MainActivity : ComponentActivity() {
