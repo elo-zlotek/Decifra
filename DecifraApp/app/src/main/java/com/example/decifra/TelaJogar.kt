@@ -34,7 +34,11 @@ val CorLinhaAmarela = Color(0xFFE8B614)
 val CorLinhaVermelha = Color(0xFFDF1D44)
 
 @Composable
-fun TelaJogo(modifier: Modifier = Modifier) {
+fun TelaJogo(
+    tema: String = "",
+    onJogoFinalizado: (String, Int) -> Unit = { _, _ -> },
+    modifier: Modifier = Modifier
+) {
     val tentativas = remember { mutableStateOf(List(6) { List(5) { ' ' } }) }
     val linhaAtual = remember { mutableStateOf(0) }
     val colunaAtual = remember { mutableStateOf(0) }
@@ -47,7 +51,12 @@ fun TelaJogo(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {
-        Spacer(modifier = Modifier.height(16.dp))
+        Text(
+            text = tema,
+            fontSize = 24.sp,
+            fontWeight = FontWeight.Bold,
+            color = Color.Black
+        )
 
         GridPalavras(
             tentativas = tentativas.value,
@@ -63,6 +72,11 @@ fun TelaJogo(modifier: Modifier = Modifier) {
                     novaTentativas[linhaAtual.value] = novaLinha
                     tentativas.value = novaTentativas
                     colunaAtual.value++
+
+                    if (colunaAtual.value == 5) {
+                        val palavra = tentativas.value[linhaAtual.value].joinToString("")
+                        onJogoFinalizado(palavra, 5)
+                    }
                 }
             }
         )

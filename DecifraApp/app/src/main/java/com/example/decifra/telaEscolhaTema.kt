@@ -1,4 +1,4 @@
-package com.example.decifraappescolhaumtema
+package com.example.decifra
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -132,4 +132,3 @@ fun BotaoTema(
         )
     }
 }
-

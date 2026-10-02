@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
+import androidx.navigation.compose.rememberNavController
+import com.example.decifra.Navigation.AppNavigation
 import com.example.decifra.ui.theme.DecifraTheme
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +19,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             DecifraTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    TelaInicial(
+                    val navController = rememberNavController()
+                    AppNavigation(
+                        navController = navController,
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -25,10 +29,3 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
-
-
-
-
-

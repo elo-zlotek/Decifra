@@ -28,10 +28,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun TelaInstrucoes(modifier: Modifier = Modifier) {
+fun TelaInstrucoes(
+    onContinuarClick: () -> Unit = {},
+    modifier: Modifier = Modifier
+) {
 
     Column(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .background(Color(0xFFF4E9E0))
             .padding(horizontal = 24.dp),
@@ -183,7 +186,7 @@ fun TelaInstrucoes(modifier: Modifier = Modifier) {
 
 
         Button(
-            onClick = {},
+            onClick = onContinuarClick,
             modifier = Modifier
                 .fillMaxWidth()
                 .height(65.dp)

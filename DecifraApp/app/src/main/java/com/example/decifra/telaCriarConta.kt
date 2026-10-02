@@ -1,5 +1,6 @@
 package com.example.decifra
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +17,7 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -24,19 +26,21 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.decifra.auth.AuthManager
 
 @Composable
 fun TelaCriarConta(
-    onCriarClick: (String, String) -> Unit = { _, _ -> },
+    onContaCriadaClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var usuario by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
+    val context = LocalContext.current
 
     Column(
         modifier = modifier
@@ -95,7 +99,27 @@ fun TelaCriarConta(
         Spacer(modifier = Modifier.height(48.dp))
 
         Button(
-            onClick = { onCriarClick(usuario, senha) },
+            onClick = {
+                if(usuario.isBlank() || senha.isBlank()) {
+                    Toast.makeText(context,
+                        "Preencha todos os campos",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    if (AuthManager.cadastro(usuario, senha)){
+                        Toast.makeText(context,
+                            "Cadastro realizado com Sucesso!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        onContaCriadaClick()
+                    } else {
+                        Toast.makeText(context,
+                            "Usuario já cadastrado!",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            },
             modifier = Modifier
                 .width(220.dp)
                 .height(55.dp)
@@ -112,11 +136,9 @@ fun TelaCriarConta(
                 fontWeight = FontWeight.Bold
             )
         }
-    }
-}
 
-@Preview(showBackground = true)
-@Composable
-fun PreviewTelaCriarConta() {
-    TelaCriarConta()
+        TextButton(onClick = onContaCriadaClick) {
+            Text("Já tenho cadastro.")
+        }
+    }
 }

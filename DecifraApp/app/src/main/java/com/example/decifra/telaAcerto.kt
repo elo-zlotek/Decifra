@@ -33,6 +33,7 @@ import androidx.compose.ui.unit.sp
 fun TelaAcerto(
     palavra: String = "CARGA",
     pontos: Int = 5,
+    onReiniciarClick: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
     Column(
@@ -96,7 +97,7 @@ fun TelaAcerto(
         Spacer(modifier = Modifier.height(48.dp))
 
         Button(
-            onClick = {},
+            onClick = onReiniciarClick,
             modifier = Modifier
                 .width(220.dp)
                 .height(60.dp)

@@ -1,8 +1,8 @@
 package com.example.decifra
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -26,21 +26,22 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.PasswordVisualTransformation
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.decifra.auth.AuthManager
 
 @Composable
 fun TelaLogin(
-    onEntrarClick: () -> Unit = {},
-    onCriarContaClick: () -> Unit = {},
+    onEntrarClick: () -> Unit,
+    onCriarContaClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var usuario by remember { mutableStateOf("") }
     var senha by remember { mutableStateOf("") }
+    val context = LocalContext.current
 
     Column(
         modifier = modifier
@@ -99,7 +100,16 @@ fun TelaLogin(
         Spacer(modifier = Modifier.height(48.dp))
 
         Button(
-            onClick = { onEntrarClick() },
+            onClick = {
+                if (AuthManager.login(usuario, senha)){
+                    onEntrarClick()
+                }else{
+                    Toast.makeText(context,
+                        "Usuário ou Senha Inválido!",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            },
             modifier = Modifier
                 .width(220.dp)
                 .height(55.dp)
@@ -123,10 +133,4 @@ fun TelaLogin(
             Text("Não tem conta? Cadastre-se")
         }
     }
-}
-
-@Preview(showBackground = true)
-@Composable
-fun PreviewTelaLogin() {
-    TelaLogin()
 }
